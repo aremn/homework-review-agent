@@ -1,0 +1,17 @@
+services:
+  getcourse-bot:
+    build: .
+    container_name: getcourse_reply_bot
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - bot_cookies:/app/getcourse-reply-bot/.cookies
+    shm_size: "2gb"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+volumes:
+  bot_cookies:

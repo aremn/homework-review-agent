@@ -1,0 +1,52 @@
+.gc-ai-prompt-container {
+  margin-top: 15px;
+  padding: 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+.gc-ai-prompt-container label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #555;
+  font-size: 13px;
+}
+.gc-ai-prompt-container textarea {
+  width: 100%;
+  min-height: 120px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 13px;
+  line-height: 1.5;
+  resize: vertical;
+}
+.gc-ai-prompt-container button {
+  margin-right: 10px;
+}
+.gc-ai-prompt-container .save-status {
+  display: inline-block;
+  margin-left: 10px;
+  font-weight: bold;
+  font-size: 12px;
+  transition: color 0.3s ease;
+}
+.gc-ai-prompt-container .save-status.success {
+  color: green;
+}
+.gc-ai-prompt-container .save-status.error {
+  color: red;
+}
+.gc-ai-prompt-container .save-status.saving {
+  color: orange;
+}
+.gc-ai-prompt-container.hidden {
+  display: none;
+}
+#gc-ai-prompt-button .fa-magic {
+  margin-right: 5px;
+}

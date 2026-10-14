@@ -1,0 +1,716 @@
+:root {
+  --primary-color: #007bff;
+  --secondary-color: #6c757d;
+  --danger-color: #dc3545;
+  --success-color: #28a745;
+  --warning-color: #ffc107;
+  --info-color: #17a2b8;
+  --light-color: #f8f9fa;
+  --dark-color: #343a40;
+  --text-color: #333;
+  --text-muted-color: #6c757d;
+  --bg-color: #f8f9fa;
+  --card-bg: #ffffff;
+  --border-color: #dee2e6;
+  --input-border-color: #ced4da;
+  --font-family:
+    system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
+    "Open Sans", "Helvetica Neue", sans-serif;
+}
+body {
+  font-family: var(--font-family);
+  width: 380px;
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-size: 14px;
+}
+.popup-container {
+  padding: 15px;
+}
+.popup-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-color);
+}
+.header-icon {
+  font-size: 20px;
+  color: var(--primary-color);
+  margin-right: 8px;
+}
+h1 {
+  font-size: 18px;
+  margin: 0;
+  text-align: center;
+  color: var(--text-color);
+  font-weight: 600;
+}
+.status-message {
+  font-style: italic;
+  color: var(--text-muted-color);
+  text-align: center;
+  font-size: 12px;
+  min-height: 1.2em;
+  margin-bottom: 10px;
+  padding: 2px 0;
+  transition: color 0.3s ease;
+}
+.status-message.success {
+  color: var(--success-color);
+  font-style: normal;
+  font-weight: 500;
+}
+.status-message.error {
+  color: var(--danger-color);
+  font-style: normal;
+  font-weight: 500;
+}
+.status-message.info {
+  color: var(--primary-color);
+  font-style: normal;
+}
+.status-message.warning {
+  color: var(--warning-color);
+  font-style: normal;
+}
+.view.hidden {
+  display: none;
+}
+.card {
+  background-color: var(--card-bg);
+  padding: 15px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  margin-bottom: 15px;
+}
+.form-group {
+  margin-bottom: 12px;
+}
+.form-group label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #555;
+}
+.form-group .icon {
+  margin-right: 6px;
+  width: 16px;
+  text-align: center;
+  color: var(--text-muted-color);
+}
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="text"],
+.form-group textarea {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--input-border-color);
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+  transition:
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+}
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+.error-message {
+  color: var(--danger-color);
+  font-size: 12px;
+  margin-top: 8px;
+  text-align: center;
+  min-height: 1.2em;
+  font-weight: 500;
+}
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  gap: 10px;
+}
+.button-group button {
+  flex-grow: 1;
+  margin: 0;
+  justify-content: center;
+}
+button {
+  padding: 9px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition:
+    background-color 0.2s ease,
+    opacity 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+button:hover {
+  opacity: 0.9;
+}
+button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+button.button-primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+button.button-secondary {
+  background-color: var(--secondary-color);
+  color: white;
+}
+button.button-danger {
+  background-color: var(--danger-color);
+  color: white;
+}
+.user-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  font-size: 13px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-color);
+}
+.user-info .icon {
+  font-size: 18px;
+  margin-right: 8px;
+  color: var(--text-muted-color);
+}
+.user-info span {
+  flex-grow: 1;
+  color: var(--text-muted-color);
+}
+.user-info strong {
+  color: var(--text-color);
+  font-weight: 600;
+}
+button.button-logout {
+  background: none;
+  border: none;
+  color: var(--secondary-color);
+  padding: 0 0 0 10px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 0;
+}
+button.button-logout:hover {
+  color: var(--danger-color);
+}
+.prompts-list-container {
+  font-size: 12px;
+  background-color: var(--bg-color);
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  min-height: 50px;
+  max-height: 180px;
+  overflow-y: auto;
+  margin-bottom: 15px;
+}
+.prompts-list-container p {
+  margin: 5px 0;
+  color: var(--text-muted-color);
+  font-style: italic;
+  text-align: center;
+}
+.prompts-header {
+  font-size: 14px;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--text-color);
+}
+#prompts-list .prompt-item {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+  position: relative;
+  padding-right: 60px;
+}
+#prompts-list .prompt-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+#prompts-list .prompt-key {
+  font-weight: 600;
+  display: block;
+  color: #444;
+  margin-bottom: 4px;
+  font-size: 13px;
+}
+#prompts-list .prompt-text {
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: #555;
+  font-size: 13px;
+  line-height: 1.5;
+}
+#prompts-list .prompt-actions {
+  position: absolute;
+  top: 0px;
+  right: 0;
+  display: flex;
+  gap: 5px;
+}
+#prompts-list .prompt-actions button {
+  background: none;
+  border: none;
+  padding: 2px 4px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--text-muted-color);
+  margin: 0;
+  line-height: 1;
+}
+#prompts-list .prompt-actions button:hover {
+  color: var(--primary-color);
+}
+#prompts-list .prompt-actions button.delete-btn:hover {
+  color: var(--danger-color);
+}
+#gc-accounts-section .prompts-header {
+  margin-bottom: 0;
+}
+#gc-accounts-list {
+  min-height: 30px;
+  max-height: 150px;
+}
+#gc-accounts-list .gc-account-item {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+  position: relative;
+  padding-right: 60px;
+  font-size: 13px;
+}
+#gc-accounts-list .gc-account-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+#gc-accounts-list .gc-account-info span {
+  display: block;
+  margin-bottom: 3px;
+  color: #555;
+}
+#gc-accounts-list .gc-account-info strong {
+  color: var(--primary-color);
+}
+#gc-accounts-list .gc-account-info .status {
+  font-style: italic;
+  font-size: 12px;
+  margin-top: 2px;
+}
+#gc-accounts-list .gc-account-info .status-success {
+  color: var(--success-color);
+  font-style: normal;
+  font-weight: 500;
+}
+#gc-accounts-list .gc-account-info .status-failed {
+  color: var(--danger-color);
+  font-style: normal;
+  font-weight: 500;
+}
+#gc-accounts-list .gc-account-info .status-pending {
+  color: var(--text-muted-color);
+}
+#gc-accounts-list .gc-account-info .status-inactive {
+  color: var(--warning-color);
+  font-style: normal;
+  font-weight: 500;
+}
+#gc-accounts-list .gc-account-actions {
+  position: absolute;
+  top: 0px;
+  right: 0;
+  display: flex;
+  gap: 5px;
+}
+#gc-accounts-list .gc-account-actions button {
+  background: none;
+  border: none;
+  padding: 2px 4px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--text-muted-color);
+  margin: 0;
+  line-height: 1;
+}
+#gc-accounts-list .gc-account-actions button:hover {
+  color: var(--primary-color);
+}
+#gc-accounts-list .gc-account-actions button.delete-btn:hover {
+  color: var(--danger-color);
+}
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 15px;
+  box-sizing: border-box;
+}
+.modal-overlay.hidden {
+  display: none;
+}
+
+.modal-content {
+  width: 95%;
+  max-width: 420px;
+  box-sizing: border-box;
+  background-color: var(--card-bg);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-content h2 {
+  margin-top: 0;
+  font-size: 16px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+.modal-content p {
+  margin-bottom: 15px;
+  font-size: 13px;
+}
+.modal-content p strong {
+  color: var(--primary-color);
+}
+#edit-prompt-textarea {
+  width: 100%;
+  min-height: 150px;
+  box-sizing: border-box;
+  padding: 8px 10px;
+  border: 1px solid var(--input-border-color);
+  border-radius: 4px;
+  font-size: 13px;
+  resize: vertical;
+  margin-bottom: 10px;
+}
+#edit-prompt-textarea {
+  resize: none !important;
+}
+#edit-status-message {
+  min-height: 1.2em;
+  margin-top: 5px;
+  font-size: 12px;
+}
+#gc-account-modal label small {
+  line-height: 1.3;
+}
+#gc-accounts-list .gc-account-actions button i.fa-toggle-on,
+#gc-accounts-list .gc-account-actions button i.fa-toggle-off {
+  font-size: 1.2em;
+  vertical-align: middle;
+}
+
+#gc-accounts-list .gc-account-info .status-processing {
+  color: var(--info-color);
+  font-style: normal;
+  font-weight: 500;
+}
+
+#gc-accounts-list .gc-account-actions button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+#gc-accounts-list .gc-account-actions button:disabled:hover {
+  color: var(--text-muted-color);
+}
+
+#course-variables-section .prompts-header {
+  margin-bottom: 0;
+}
+#course-variables-list {
+  min-height: 30px;
+  max-height: 150px;
+}
+#course-variables-list .cv-item {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+  position: relative;
+  padding-right: 60px;
+  font-size: 13px;
+}
+#course-variables-list .cv-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+#course-variables-list .cv-name {
+  font-weight: 600;
+  display: block;
+  color: #444;
+  margin-bottom: 4px;
+}
+#course-variables-list .cv-value {
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: #555;
+  max-height: 60px;
+  overflow-y: auto;
+  font-size: 12px;
+  background: #f9f9f9;
+  padding: 3px 5px;
+  border-radius: 3px;
+}
+#course-variables-list .cv-actions {
+  position: absolute;
+  top: 0px;
+  right: 0;
+  display: flex;
+  gap: 5px;
+}
+#course-variables-list .cv-actions button {
+  background: none;
+  border: none;
+  padding: 2px 4px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--text-muted-color);
+  margin: 0;
+  line-height: 1;
+}
+#course-variables-list .cv-actions button:hover {
+  color: var(--primary-color);
+}
+#course-variables-list .cv-actions button.delete-btn:hover {
+  color: var(--danger-color);
+}
+
+#cv-gc-account-select {
+  margin-bottom: 10px;
+}
+#course-variable-modal label small code {
+  background-color: #e9ecef;
+  padding: 0.1em 0.3em;
+  border-radius: 3px;
+  font-family: monospace;
+}
+
+button.icon-btn,
+.prompt-actions button,
+.gc-account-actions button,
+.cv-actions button {
+  background: none;
+  border: none;
+  color: var(--text-muted-color);
+  padding: 4px 7px;
+  border-radius: 4px;
+  font-size: 15px;
+  transition:
+    background 0.15s,
+    color 0.15s;
+  margin: 0 2px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+button.icon-btn:hover,
+.prompt-actions button:hover,
+.gc-account-actions button:hover,
+.cv-actions button:hover {
+  background: var(--light-color);
+  color: var(--primary-color);
+}
+button.icon-btn.delete-btn:hover,
+.prompt-actions button.delete-btn:hover,
+.gc-account-actions button.delete-btn:hover,
+.cv-actions button.delete-btn:hover {
+  color: var(--danger-color);
+  background: #ffeaea;
+}
+
+select,
+#cv-gc-account-select {
+  border: 1px solid var(--input-border-color);
+  border-radius: 4px;
+  padding: 7px 10px;
+  font-size: 13px;
+  background: #fff;
+  transition: border 0.2s;
+}
+select:focus,
+#cv-gc-account-select:focus {
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+textarea,
+#edit-prompt-textarea,
+#cv-value {
+  border: 1px solid var(--input-border-color);
+  border-radius: 4px;
+  padding: 8px 10px;
+  font-size: 13px;
+  background: #fafbfc;
+  transition: border 0.2s;
+}
+textarea:focus,
+#edit-prompt-textarea:focus,
+#cv-value:focus {
+  border-color: var(--primary-color);
+  background: #fff;
+}
+
+.modal-overlay {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+.modal-overlay:not(.hidden) {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-content .button-group button {
+  margin: 0 4px;
+  min-width: 110px;
+}
+
+.status-message {
+  transition:
+    color 0.2s,
+    background 0.2s;
+}
+.status-message.success {
+  background: #eafbe7;
+  border-radius: 3px;
+}
+.status-message.error {
+  background: #fff0f0;
+  border-radius: 3px;
+}
+.status-message.info {
+  background: #eaf4fb;
+  border-radius: 3px;
+}
+
+.prompts-list-container,
+#gc-accounts-list,
+#course-variables-list,
+textarea,
+#edit-prompt-textarea,
+#cv-value,
+.modal-content {
+  scrollbar-width: thin;
+  scrollbar-color: #d1d5db #f1f1f1;
+}
+.prompts-list-container::-webkit-scrollbar,
+#gc-accounts-list::-webkit-scrollbar,
+#course-variables-list::-webkit-scrollbar,
+textarea::-webkit-scrollbar,
+#edit-prompt-textarea::-webkit-scrollbar,
+#cv-value::-webkit-scrollbar,
+.modal-content::-webkit-scrollbar {
+  width: 7px;
+  background: #f1f1f1;
+}
+.prompts-list-container::-webkit-scrollbar-thumb,
+#gc-accounts-list::-webkit-scrollbar-thumb,
+#course-variables-list::-webkit-scrollbar-thumb,
+textarea::-webkit-scrollbar-thumb,
+#edit-prompt-textarea::-webkit-scrollbar-thumb,
+#cv-value::-webkit-scrollbar-thumb,
+.modal-content::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+.prompts-list-container::-webkit-scrollbar-thumb:hover,
+#gc-accounts-list::-webkit-scrollbar-thumb:hover,
+#course-variables-list::-webkit-scrollbar-thumb:hover,
+textarea::-webkit-scrollbar-thumb:hover,
+#edit-prompt-textarea::-webkit-scrollbar-thumb:hover,
+#cv-value::-webkit-scrollbar-thumb:hover,
+.modal-content::-webkit-scrollbar-thumb:hover {
+  background: #b0b8c1;
+}
+
+#edit-prompt-textarea,
+#cv-value {
+  overflow-x: hidden;
+  resize: vertical;
+  min-height: 100px;
+  max-height: 220px;
+}
+
+.modal-content {
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 14px;
+}
+
+.error-message {
+  background: none;
+  color: var(--danger-color);
+}
+.error-message:empty {
+  padding: 0;
+  margin: 0;
+  background: none;
+  border: none;
+  min-height: 0;
+}
+
+.status-message:empty {
+  background: none;
+  padding: 0;
+  min-height: 0;
+  border: none;
+}
+
+html,
+body,
+.popup-container {
+  scrollbar-width: thin !important;
+  scrollbar-color: #e0e0e0 #fafbfc !important;
+}
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+.popup-container::-webkit-scrollbar {
+  width: 6px !important;
+  background: #fafbfc !important;
+}
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb,
+.popup-container::-webkit-scrollbar-thumb {
+  background: #e0e0e0 !important;
+  border-radius: 6px !important;
+}
+html::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:hover,
+.popup-container::-webkit-scrollbar-thumb:hover {
+  background: #cccccc !important;
+}

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>GetCourse AI Helper</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <div class="popup-container">
+      <header class="popup-header">
+        <i class="fa-solid fa-robot header-icon"></i>
+        <h1>GC AI Помощник</h1>
+      </header>
+
+      <div id="status-message" class="status-message">Инициализация...</div>
+
+      <div id="auth-login-view" class="view hidden">
+        <h2>Вход / Регистрация</h2>
+        <div class="card">
+          <div class="form-group">
+            <label for="email"><i class="fa-regular fa-envelope icon"></i> Email</label>
+            <input type="email" id="email" placeholder="your@email.com" required />
+          </div>
+          <div class="form-group">
+            <label for="password"><i class="fa-solid fa-lock icon"></i> Пароль</label>
+            <input type="password" id="password" placeholder="••••••••" required />
+          </div>
+          <div id="auth-error" class="error-message"></div>
+          <div class="button-group">
+            <button id="login-button" class="button-primary">
+              <i class="fa-solid fa-right-to-bracket"></i> Войти
+            </button>
+            <button id="signup-button" class="button-secondary">
+              <i class="fa-solid fa-user-plus"></i> Регистрация
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="auth-loggedin-view" class="view hidden">
+        <div class="user-info">
+          <i class="fa-regular fa-circle-user icon"></i>
+          <span><strong id="user-email"></strong></span>
+          <button
+            id="logout-button"
+            class="button-logout icon-btn"
+            title="Выйти"
+            aria-label="Выйти"
+          >
+            <i class="fa-solid fa-right-from-bracket"></i>
+          </button>
+        </div>
+
+        <div class="card" id="gc-accounts-section">
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin-bottom: 10px;
+            "
+          >
+            <h2 class="prompts-header" style="margin-bottom: 0">Аккаунты GetCourse</h2>
+            <button
+              id="add-gc-account-button"
+              class="button-primary"
+              style="padding: 5px 10px; font-size: 12px"
+            >
+              <i class="fa-solid fa-plus"></i> Добавить
+            </button>
+          </div>
+          <div
+            id="gc-accounts-list"
+            class="prompts-list-container"
+            style="min-height: 30px; max-height: 150px"
+          >
+            <p>Загрузка аккаунтов...</p>
+          </div>
+          <div
+            id="gc-account-status"
+            class="status-message"
+            style="text-align: left; margin-top: 5px"
+          ></div>
+        </div>
+
+        <div class="card">
+          <h2 class="prompts-header">AI Промпты</h2>
+          <div
+            id="prompts-list"
+            class="prompts-list-container"
+            style="min-height: 50px; max-height: 180px"
+          >
+            <p>Загрузка...</p>
+          </div>
+          <div
+            id="prompt-status"
+            class="status-message"
+            style="text-align: left; margin-top: 5px"
+          ></div>
+        </div>
+
+        <div class="card" id="course-variables-section">
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin-bottom: 10px;
+            "
+          >
+            <h2 class="prompts-header" style="margin-bottom: 0">Переменные Курса</h2>
+            <button
+              id="add-course-variable-button"
+              class="button-primary"
+              style="padding: 5px 10px; font-size: 12px"
+            >
+              <i class="fa-solid fa-plus"></i> Добавить
+            </button>
+          </div>
+          <div class="form-group" style="margin-bottom: 10px">
+            <label for="cv-gc-account-select" style="font-weight: normal; font-size: 12px">
+              <i class="fa-solid fa-school icon"></i>Для аккаунта GetCourse:
+            </label>
+            <select
+              id="cv-gc-account-select"
+              style="
+                width: 100%;
+                padding: 6px;
+                font-size: 13px;
+                border-radius: 4px;
+                border: 1px solid var(--input-border-color);
+              "
+            >
+              <option value="">-- Выберите аккаунт --</option>
+            </select>
+          </div>
+          <div
+            id="course-variables-list"
+            class="prompts-list-container"
+            style="min-height: 30px; max-height: 150px"
+          >
+            <p>Выберите аккаунт для просмотра переменных.</p>
+          </div>
+          <div
+            id="course-variable-status"
+            class="status-message"
+            style="text-align: left; margin-top: 5px"
+          ></div>
+        </div>
+      </div>
+
+      <div id="edit-prompt-modal" class="modal-overlay hidden">
+        <div class="modal-content card">
+          <h2 id="edit-prompt-modal-title">Редактировать промпт</h2>
+          <p>
+            <strong>Урок ID: <span id="edit-lesson-id"></span></strong>
+          </p>
+          <input type="hidden" id="edit-prompt-db-id" />
+
+          <div class="form-group">
+            <label for="edit-prompt-textarea">Текст основного промпта:</label>
+            <textarea
+              id="edit-prompt-textarea"
+              placeholder="Используйте {{переменная}} и {history}"
+            ></textarea>
+          </div>
+
+          <hr style="margin: 15px 0" />
+          <h3 style="font-size: 14px; margin-bottom: 10px">
+            Настройки лимита и финального сообщения:
+          </h3>
+
+          <div class="form-group">
+            <label for="edit-max-messages"
+              ><i class="fa-solid fa-list-ol icon"></i> Макс. сообщений в треде:</label
+            >
+            <input
+              type="number"
+              id="edit-max-messages"
+              min="0"
+              placeholder="0 или пусто = без лимита"
+              style="width: 100px"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="edit-final-message-text"
+              ><i class="fa-regular fa-comment-dots icon"></i> Статический финальный текст:</label
+            >
+            <textarea
+              id="edit-final-message-text"
+              rows="3"
+              placeholder="Если не выбран спец. промпт для финала"
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="edit-final-prompt-select"
+              ><i class="fa-solid fa-lightbulb icon"></i> Промпт для финального сообщения:</label
+            >
+            <select id="edit-final-prompt-select">
+              <option value="">-- Использовать статический текст выше --</option>
+            </select>
+            <small>Выберите другой промпт для генерации финального ответа.</small>
+          </div>
+
+          <div id="edit-status-message" class="status-message" style="text-align: left"></div>
+          <div class="button-group">
+            <button id="save-edit-button" class="button-primary">
+              <i class="fa-solid fa-save"></i> Сохранить промпт
+            </button>
+            <button id="cancel-edit-button" class="button-secondary">
+              <i class="fa-solid fa-times"></i> Отмена
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="gc-account-modal" class="modal-overlay hidden">
+        <div class="modal-content card">
+          <h2 id="gc-modal-title">Добавить аккаунт GetCourse</h2>
+          <input type="hidden" id="edit-gc-account-id" />
+          <div class="form-group">
+            <label for="gc-subdomain"
+              ><i class="fa-solid fa-globe icon"></i> Поддомен GetCourse</label
+            >
+            <input type="text" id="gc-subdomain" placeholder="например, mycompany" required />
+          </div>
+          <div class="form-group">
+            <label for="gc-email"
+              ><i class="fa-regular fa-envelope icon"></i> Email для входа</label
+            >
+            <input type="email" id="gc-email" placeholder="admin@mycompany.com" required />
+          </div>
+          <div class="form-group">
+            <label for="gc-password"><i class="fa-solid fa-lock icon"></i> Пароль</label>
+            <input
+              type="password"
+              id="gc-password"
+              placeholder="Введите пароль (обязательно при добавлении)"
+              required
+            />
+            <small style="font-size: 11px; color: #6c757d; display: block; margin-top: 3px"
+              >Пароль будет зашифрован. При редактировании введите новый, только если хотите его
+              изменить.</small
+            >
+          </div>
+          <div class="form-group" style="margin-top: 15px">
+            <label
+              style="flex-direction: row; align-items: center; font-weight: normal; cursor: pointer"
+            >
+              <input
+                type="checkbox"
+                id="gc-is-active"
+                checked
+                style="margin-right: 8px; transform: scale(1.1)"
+              />
+              Активен (бот будет обрабатывать)
+            </label>
+          </div>
+          <div id="gc-modal-error" class="error-message"></div>
+          <div class="button-group" style="margin-top: 15px">
+            <button id="save-gc-account-button" class="button-primary">
+              <i class="fa-solid fa-save"></i> Сохранить
+            </button>
+            <button id="cancel-gc-account-button" class="button-secondary">
+              <i class="fa-solid fa-times"></i> Отмена
+            </button>
+          </div>
+        </div>
+      </div>
+      <div id="course-variable-modal" class="modal-overlay hidden">
+        <div class="modal-content card">
+          <h2 id="cv-modal-title">Добавить Переменную</h2>
+          <input type="hidden" id="edit-cv-id" />
+          <input type="hidden" id="edit-cv-gc-account-id" />
+
+          <div class="form-group">
+            <label for="cv-name"><i class="fa-solid fa-tag icon"></i> Имя переменной</label>
+            <input
+              type="text"
+              id="cv-name"
+              placeholder="например, course_rules (без {{}})"
+              required
+            />
+            <small style="font-size: 11px; color: #6c757d; display: block; margin-top: 3px"
+              >Используйте латинские буквы, цифры и подчеркивание. Плейсхолдер в промпте:
+              <code>{{имя_переменной}}</code></small
+            >
+          </div>
+          <div class="form-group">
+            <label for="cv-value"
+              ><i class="fa-regular fa-file-lines icon"></i> Значение переменной</label
+            >
+            <textarea
+              id="cv-value"
+              placeholder="Введите значение переменной..."
+              required
+            ></textarea>
+          </div>
+
+          <div id="cv-modal-error" class="error-message"></div>
+          <div class="button-group" style="margin-top: 15px">
+            <button id="save-course-variable-button" class="button-primary">
+              <i class="fa-solid fa-save"></i> Сохранить
+            </button>
+            <button id="cancel-course-variable-button" class="button-secondary">
+              <i class="fa-solid fa-times"></i> Отмена
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="popup.bundle.js"></script>
+  </body>
+</html>

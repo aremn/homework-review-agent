@@ -1,0 +1,27 @@
+{
+  "name": "getcourse-extension",
+  "version": "1.0.0",
+  "description": "GetCourse AI Helper Extension",
+  "main": "background.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack --mode development --watch"
+  },
+  "keywords": ["getcourse", "ai", "chrome-extension"],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@supabase/supabase-js": "^2.49.4",
+    "copy-webpack-plugin": "^13.0.0",
+    "process": "^0.11.10",
+    "webpack": "^5.99.7",
+    "webpack-cli": "^6.0.1"
+  },
+  "dependencies": {
+    "buffer": "^6.0.3",
+    "stream-browserify": "^3.0.0",
+    "url": "^0.11.4",
+    "util": "^0.12.5",
+    "vm-browserify": "^1.1.2"
+  }
+}
